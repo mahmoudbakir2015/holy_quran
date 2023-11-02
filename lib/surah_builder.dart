@@ -30,9 +30,10 @@ class _SurahBuilderState extends State<SurahBuilder> {
   jumbToAyah() {
     if (fabIsClicked) {
       itemScrollController.scrollTo(
-          index: widget.ayah,
-          duration: const Duration(seconds: 2),
-          curve: Curves.easeInOutCubic);
+        index: widget.ayah,
+        duration: const Duration(seconds: 2),
+        curve: Curves.easeInOutCubic,
+      );
     }
     fabIsClicked = false;
   }
@@ -83,6 +84,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
         color: const Color.fromARGB(255, 253, 251, 240),
         child: view
             ? ScrollablePositionedList.builder(
+                physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
@@ -144,6 +146,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                 itemCount: LenghtOfSura,
               )
             : ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   Row(
                     children: [
@@ -182,46 +185,43 @@ class _SurahBuilderState extends State<SurahBuilder> {
   Widget build(BuildContext context) {
     int LengthOfSura = noOfVerses[widget.sura];
 
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.yellow),
-      home: Scaffold(
-        appBar: AppBar(
-          leading: Tooltip(
-            message: 'Mushaf Mode',
-            child: TextButton(
-              child: const Icon(
-                Icons.chrome_reader_mode,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                setState(() {
-                  view = !view;
-                });
-              },
+    return Scaffold(
+      appBar: AppBar(
+        leading: Tooltip(
+          message: 'Mushaf Mode',
+          child: TextButton(
+            child: const Icon(
+              Icons.chrome_reader_mode,
+              color: Colors.white,
             ),
+            onPressed: () {
+              setState(() {
+                view = !view;
+              });
+            },
           ),
-          centerTitle: true,
-          title: Text(
-            // widget.
-            widget.suraName,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'quran',
-                shadows: [
-                  Shadow(
-                    offset: Offset(1, 1),
-                    blurRadius: 2.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ]),
-          ),
-          backgroundColor: const Color.fromARGB(255, 56, 115, 59),
         ),
-        body: SingleSuraBuilder(LengthOfSura),
+        centerTitle: true,
+        title: Text(
+          // widget.
+          widget.suraName,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'quran',
+              shadows: [
+                Shadow(
+                  offset: Offset(1, 1),
+                  blurRadius: 2.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ]),
+        ),
+        backgroundColor: const Color.fromARGB(255, 56, 115, 59),
       ),
+      body: SingleSuraBuilder(LengthOfSura),
     );
   }
 }
@@ -235,7 +235,10 @@ class RetunBasmala extends StatelessWidget {
       const Center(
         child: Text(
           'بسم الله الرحمن الرحيم',
-          style: TextStyle(fontFamily: 'me_quran', fontSize: 30),
+          style: TextStyle(
+            fontFamily: 'me_quran',
+            fontSize: 30,
+          ),
           textDirection: TextDirection.rtl,
         ),
       ),

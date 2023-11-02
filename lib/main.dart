@@ -3,7 +3,9 @@ import 'package:ytquran/constant.dart';
 import 'index.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatefulWidget {

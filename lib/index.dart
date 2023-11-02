@@ -48,11 +48,21 @@ class _IndexPageState extends State<IndexPage> {
                 Shadow(
                   offset: Offset(1, 1),
                   blurRadius: 2.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: Color.fromARGB(
+                    255,
+                    0,
+                    0,
+                    0,
+                  ),
                 ),
               ]),
         ),
-        backgroundColor: const Color.fromARGB(255, 56, 115, 59),
+        backgroundColor: const Color.fromARGB(
+          255,
+          56,
+          115,
+          59,
+        ),
       ),
       body: FutureBuilder(
         future: readJson(),
@@ -82,6 +92,7 @@ class _IndexPageState extends State<IndexPage> {
     return Container(
       color: const Color.fromARGB(255, 221, 250, 236),
       child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           for (int i = 0; i < 114; i++)
             Container(
