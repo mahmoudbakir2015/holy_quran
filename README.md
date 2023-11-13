@@ -1,4 +1,4 @@
-# holQuran
+# holyQuran
 
 A new Flutter project.
 
